@@ -1,5 +1,7 @@
 package com.example.algamoney.api.model;
 
+import java.beans.Transient;
+
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -62,6 +64,7 @@ public class Pessoa {
 	}
 
 	@JsonIgnore
+	@Transient
 	public boolean isInativo() {
 		return !this.ativo;
 	}
