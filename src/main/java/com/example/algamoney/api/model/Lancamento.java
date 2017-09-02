@@ -38,20 +38,20 @@ public class Lancamento {
 	@NotNull
 	private BigDecimal valor;
 
-	@Size(min = 3, max = 100)
-	@NotNull
 	private String observacao;
 
 	@NotNull
 	@Enumerated(EnumType.STRING)
 	private TipoLancamento tipo;
 
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "codigo_categoria")
 	private Categoria categoria;
 
+	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "codigo_pesso")
+	@JoinColumn(name = "codigo_pessoa")
 	private Pessoa pessoa;
 
 	public Long getCodigo() {
