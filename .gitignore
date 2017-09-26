@@ -26,8 +26,10 @@ rebel.xml
 *.context.xml
 src/main/webapp/META-INF/
 src/main/resources/application.properties
+.factorypath
 
 .mvn/
 mvnw
 mvnw.cmd
+
 
