@@ -20,6 +20,7 @@ import com.example.algamoney.api.model.Categoria_;
 import com.example.algamoney.api.model.Lancamento;
 import com.example.algamoney.api.model.Lancamento_;
 import com.example.algamoney.api.model.Pessoa_;
+import com.example.algamoney.api.repository.PaginatorUtil;
 import com.example.algamoney.api.repository.filter.LancamentoFilter;
 import com.example.algamoney.api.repository.projection.ResumoLancamento;
 
@@ -40,7 +41,7 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 
 		TypedQuery<Lancamento> query = manager.createQuery(criteria);
 
-		adicionarRestricoesDePaginacao(query, pageable);
+		PaginatorUtil.adicionarRestricoesDePaginacao(query, pageable);
 
 		return new PageImpl<>(query.getResultList(), pageable, total(lancamentoFilter));
 	}
@@ -60,7 +61,7 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 
 		TypedQuery<ResumoLancamento> query = manager.createQuery(criteria);
 
-		adicionarRestricoesDePaginacao(query, pageable);
+		PaginatorUtil.adicionarRestricoesDePaginacao(query, pageable);
 
 		return new PageImpl<>(query.getResultList(), pageable, total(lancamentoFilter));
 
@@ -74,16 +75,6 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 		criteria.where(predicates);
 		criteria.select(builder.count(root));
 		return manager.createQuery(criteria).getSingleResult();
-	}
-
-	private void adicionarRestricoesDePaginacao(TypedQuery<?> query, Pageable pageable) {
-		int paginaAtual = pageable.getPageNumber();
-		int totalRegistrosPagina = pageable.getPageSize();
-		int primeiroRegistro = paginaAtual * totalRegistrosPagina;
-
-		query.setFirstResult(primeiroRegistro);
-		query.setMaxResults(totalRegistrosPagina);
-
 	}
 
 	private Predicate[] criarRestricoes(LancamentoFilter lancamentoFilter, CriteriaBuilder builder,
