@@ -22,7 +22,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		clients.inMemory().withClient("angular").secret("@ngul@r0").scopes("read", "write")
-				.authorizedGrantTypes("password", "refresh_token").accessTokenValiditySeconds(20)
+				.authorizedGrantTypes("password", "refresh_token").accessTokenValiditySeconds(60)
+				.refreshTokenValiditySeconds(3600 * 24)
+				// Exemplo da criação de outro cliente.
+				.and().withClient("mobile").secret("mobile").scopes("read")
+				.authorizedGrantTypes("password", "refresh_token").accessTokenValiditySeconds(60)
 				.refreshTokenValiditySeconds(3600 * 24);
 	}
 
