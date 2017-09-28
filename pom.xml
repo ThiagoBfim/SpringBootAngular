@@ -80,7 +80,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-jpamodelgen</artifactId>
-			<scope>provided</scope>
+			<scope>import</scope>
 		</dependency>
 
 		<dependency>
